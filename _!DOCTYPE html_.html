@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portas Lux • Elegância em Cada Detalhe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap');
+
+        :root {
+            --wood: #8C5A2B;
+        }
+
+        * {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .heading-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.75)), url('https://picsum.photos/id/1015/2000/1200');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .door-card {
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .door-card:hover {
+            transform: scale(1.06) translateY(-15px);
+            box-shadow: 0 30px 60px -15px rgb(140 90 43 / 0.4);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #8C5A2B;
+            transition: width 0.4s ease;
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(to right, #8C5A2B, #D4A373);
+            z-index: 50;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: #8C5A2B;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-200 overflow-x-hidden">
+    <!-- Progress Bar -->
+    <div id="progress-bar" class="scroll-progress w-0"></div>
+
+    <!-- Navbar -->
+    <nav class="bg-zinc-950/90 backdrop-blur-lg fixed w-full z-50 border-b border-zinc-800">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-amber-800 rounded-xl flex items-center justify-center text-2xl">🚪</div>
+                <div>
+                    <span class="heading-font text-3xl font-bold tracking-tight text-white">PORTAS</span>
+                    <span class="heading-font text-3xl font-bold tracking-tight text-amber-600">LUX</span>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-10 text-sm font-medium">
+                <a href="#home" class="nav-link text-white hover:text-amber-400">Início</a>
+                <a href="#colecao" class="nav-link text-white hover:text-amber-400">Coleção</a>
+                <a href="#sobre" class="nav-link text-white hover:text-amber-400">Sobre</a>
+                <a href="#projetos" class="nav-link text-white hover:text-amber-400">Projetos</a>
+                <a href="#contato" class="nav-link text-white hover:text-amber-400">Contato</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button onclick="toggleCart()" 
+                        class="px-6 py-3 bg-zinc-900 hover:bg-zinc-800 border border-amber-700 rounded-2xl flex items-center gap-3 text-sm font-medium">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span id="cart-count" class="text-amber-400">0</span>
+                </button>
+                <button onclick="showMenu()" 
+                        class="md:hidden w-11 h-11 flex items-center justify-center text-2xl">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home" class="hero-bg h-screen flex items-center relative">
+        <div class="max-w-5xl mx-auto px-6 text-center z-10">
+            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-6 py-2 rounded-full mb-8 border border-white/20">
+                <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
+                <span class="uppercase tracking-[3px] text-sm font-medium">Coleção 2026</span>
+            </div>
+            
+            <h1 class="heading-font text-7xl md:text-8xl font-bold leading-none mb-6 tracking-tighter">
+                PORTAS QUE<br>TRANSFORMAM<br>ESPAÇOS
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-zinc-300 max-w-2xl mx-auto mb-12">
+                Design atemporal, materiais premium e acabamentos impecáveis. 
+                Cada porta é uma obra de arte.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                <button onclick="document.getElementById('colecao').scrollIntoView({ behavior: 'smooth' })" 
+                        class="px-10 py-6 bg-amber-700 hover:bg-amber-600 text-lg font-semibold rounded-3xl flex items-center justify-center gap-4 group">
+                    EXPLORAR COLEÇÃO
+                    <i class="fa-solid fa-arrow-right group-active:rotate-45"></i>
+                </button>
+                <button onclick="document.getElementById('contato').scrollIntoView({ behavior: 'smooth' })" 
+                        class="px-10 py-6 border-2 border-white/70 hover:border-white text-lg font-semibold rounded-3xl">
+                    SOLICITAR ORÇAMENTO
+                </button>
+            </div>
+
+            <div class="mt-20 flex justify-center gap-12 text-sm">
+                <div class="text-center">
+                    <div class="text-4xl font-semibold text-amber-400">15+</div>
+                    <div class="text-zinc-400">Anos de excelência</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-semibold text-amber-400">280</div>
+                    <div class="text-zinc-400">Projetos entregues</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-semibold text-amber-400">98%</div>
+                    <div class="text-zinc-400">Satisfação</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+            <div class="text-xs tracking-widest opacity-60">ROLE PARA CONHECER</div>
+            <div class="w-px h-12 bg-gradient-to-b from-transparent via-white to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- COLEÇÃO -->
+    <section id="colecao" class="py-28 bg-zinc-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="uppercase text-amber-600 text-sm font-medium tracking-widest">NOSSA COLEÇÃO</span>
+                <h2 class="heading-font text-6xl font-bold mt-3">Portas que inspiram</h2>
+            </div>
+
+            <!-- Filters -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12" id="filters">
+                <button onclick="filterCategory('all')" class="active-filter px-8 py-3 bg-zinc-800 hover:bg-zinc-700 rounded-3xl text-sm font-medium">Todas</button>
+                <button onclick="filterCategory('pivotante')" class="px-8 py-3 bg-zinc-800 hover:bg-zinc-700 rounded-3xl text-sm font-medium">Pivotantes</button>
+                <button onclick="filterCategory('correr')" class="px-8 py-3 bg-zinc-800 hover:bg-zinc-700 rounded-3xl text-sm font-medium">De Correr</button>
+                <button onclick="filterCategory('madeira')" class="px-8 py-3 bg-zinc-800 hover:bg-zinc-700 rounded-3xl text-sm font-medium">Madeira Maciça</button>
+                <button onclick="filterCategory('vidro')" class="px-8 py-3 bg-zinc-800 hover:bg-zinc-700 rounded-3xl text-sm font-medium">Com Vidro</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section id="sobre" class="py-28 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-16 items-center">
+                <div class="md:col-span-5">
+                    <img src="https://picsum.photos/id/201/800/1000" 
+                         class="rounded-3xl shadow-2xl w-full" alt="Atelier">
+                </div>
+                <div class="md:col-span-7">
+                    <div class="sticky top-28">
+                        <span class="text-amber-600 text-sm uppercase font-medium">Desde 2010</span>
+                        <h2 class="heading-font text-6xl font-bold leading-tight mt-4 mb-8">
+                            Mais que portas,<br>experiência de luxo
+                        </h2>
+                        <p class="text-lg text-zinc-300 leading-relaxed max-w-lg">
+                            Criamos portas que combinam tradição artesanal com tecnologia de ponta. 
+                            Cada peça é projetada e fabricada com paixão por detalhes que fazem a diferença.
+                        </p>
+                        
+                        <div class="grid grid-cols-2 gap-8 mt-16">
+                            <div>
+                                <div class="text-5xl font-semibold text-amber-400">100%</div>
+                                <div class="text-zinc-400 mt-2">Madeira certificada e materiais sustentáveis</div>
+                            </div>
+                            <div>
+                                <div class="text-5xl font-semibold text-amber-400">∞</div>
+                                <div class="text-zinc-400 mt-2">Possibilidades de personalização</div>
+                            </div>
+                        </div>
+
+                        <button onclick="document.getElementById('contato').scrollIntoView({ behavior: 'smooth' })" 
+                                class="mt-12 px-10 py-5 border border-amber-600 hover:bg-amber-600/10 rounded-3xl text-lg font-medium flex items-center gap-3">
+                            CONHEÇA NOSSA HISTÓRIA
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJETOS EM DESTAQUE -->
+    <section id="projetos" class="py-28 bg-zinc-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-6xl font-bold">Projetos em Destaque</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="group relative overflow-hidden rounded-3xl aspect-video bg-zinc-800">
+                    <img src="https://picsum.photos/id/1016/800/600" class="w-full h-full object-cover group-hover:scale-110" alt="">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
+                        <div>
+                            <div class="text-amber-400 text-sm">Residencial • São Paulo</div>
+                            <div class="text-3xl heading-font font-semibold mt-2">Casa das Árvores</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-3xl aspect-video bg-zinc-800">
+                    <img src="https://picsum.photos/id/133/800/600" class="w-full h-full object-cover group-hover:scale-110" alt="">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
+                        <div>
+                            <div class="text-amber-400 text-sm">Comercial • Rio de Janeiro</div>
+                            <div class="text-3xl heading-font font-semibold mt-2">Hotel Vista Atlântica</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-3xl aspect-video bg-zinc-800">
+                    <img src="https://picsum.photos/id/201/800/600" class="w-full h-full object-cover group-hover:scale-110" alt="">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
+                        <div>
+                            <div class="text-amber-400 text-sm">Residencial • Brasília</div>
+                            <div class="text-3xl heading-font font-semibold mt-2">Villa Moderna</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="py-28 bg-black">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="heading-font text-5xl font-bold mb-16">O que nossos clientes dizem</h2>
+            
+            <div class="relative">
+                <div id="testimonial" class="text-2xl italic leading-relaxed min-h-[200px]">
+                    "As portas da Portas Lux transformaram completamente minha casa. O acabamento é impecável e o design elevou todo o projeto de arquitetura."
+                </div>
+                <div class="mt-12 flex justify-center items-center gap-4">
+                    <div class="w-16 h-16 bg-zinc-700 rounded-2xl overflow-hidden">
+                        <img src="https://picsum.photos/id/64/200/200" class="w-full h-full object-cover" alt="">
+                    </div>
+                    <div class="text-left">
+                        <div class="font-semibold">Arq. Mariana Costa</div>
+                        <div class="text-zinc-500">São Paulo, SP</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section id="contato" class="py-28 bg-zinc-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-20">
+                <div>
+                    <h2 class="heading-font text-6xl font-bold leading-tight">Vamos criar algo<br>extraordinário juntos?</h2>
+                    <p class="mt-8 text-lg text-zinc-400">
+                        Entre em contato e transforme seu projeto com portas que contam histórias.
+                    </p>
+                    
+                    <div class="mt-16 space-y-8">
+                        <div class="flex gap-6">
+                            <i class="fa-solid fa-phone text-3xl text-amber-600"></i>
+                            <div>
+                                <div class="font-medium">(11) 98765-4321</div>
+                                <div class="text-sm text-zinc-500">Segunda a Sexta, 8h-18h</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <i class="fa-solid fa-envelope text-3xl text-amber-600"></i>
+                            <div>
+                                <div class="font-medium">contato@portaslux.com.br</div>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <i class="fa-solid fa-location-dot text-3xl text-amber-600"></i>
+                            <div>
+                                <div class="font-medium">Rua das Portas, 198 - Moema</div>
+                                <div class="text-sm text-zinc-500">São Paulo - SP</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="contact-form" onsubmit="handleSubmit(event)" class="space-y-8">
+                    <div class="grid grid-cols-2 gap-6">
+                        <input type="text" placeholder="Nome" required
+                               class="bg-zinc-800 border border-zinc-700 focus:border-amber-600 rounded-2xl px-6 py-5 outline-none">
+                        <input type="email" placeholder="Email" required
+                               class="bg-zinc-800 border border-zinc-700 focus:border-amber-600 rounded-2xl px-6 py-5 outline-none">
+                    </div>
+                    <input type="tel" placeholder="Telefone" 
+                           class="w-full bg-zinc-800 border border-zinc-700 focus:border-amber-600 rounded-2xl px-6 py-5 outline-none">
+                    <textarea placeholder="Descreva seu projeto..." rows="6"
+                              class="w-full bg-zinc-800 border border-zinc-700 focus:border-amber-600 rounded-3xl px-6 py-5 outline-none resize-none"></textarea>
+                    
+                    <button type="submit"
+                            class="w-full py-7 bg-gradient-to-r from-amber-700 to-amber-600 hover:brightness-110 text-xl font-semibold rounded-3xl">
+                        ENVIAR MENSAGEM
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black py-20 border-t border-zinc-900">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between gap-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 bg-amber-800 rounded-2xl flex items-center justify-center text-3xl">🚪</div>
+                        <span class="heading-font text-4xl font-bold">PORTAS LUX</span>
+                    </div>
+                    <p class="text-zinc-500 max-w-xs">
+                        Transformando ambientes com elegância desde 2010.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-16">
+                    <div>
+                        <div class="font-medium mb-6">Empresa</div>
+                        <div class="space-y-4 text-sm text-zinc-400">
+                            <div>Sobre nós</div>
+                            <div>Atelier</div>
+                            <div>Blog</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-medium mb-6">Produtos</div>
+                        <div class="space-y-4 text-sm text-zinc-400">
+                            <div>Pivotantes</div>
+                            <div>De correr</div>
+                            <div>Personalizadas</div>
+                            <div>Com vidro</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="font-medium mb-6">Contato</div>
+                        <div class="space-y-4 text-sm text-zinc-400">
+                            <div>WhatsApp</div>
+                            <div>Instagram</div>
+                            <div>Pinterest</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-20 pt-8 border-t border-zinc-900 text-center text-xs text-zinc-600">
+                © 2026 Portas Lux • Todos os direitos reservados • Feito com paixão pelo design
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="hidden fixed inset-0 bg-black/80 z-[100] flex items-end md:items-center justify-center">
+        <div class="bg-zinc-900 w-full max-w-lg rounded-t-3xl md:rounded-3xl overflow-hidden">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h3 class="text-2xl font-semibold">Seu Carrinho</h3>
+                    <button onclick="toggleCart()" class="text-3xl leading-none">×</button>
+                </div>
+                <div id="cart-items" class="space-y-6 min-h-[200px]">
+                    <!-- JS populated -->
+                </div>
+                <div class="border-t border-zinc-700 pt-8 mt-8">
+                    <div class="flex justify-between text-lg">
+                        <span>Total</span>
+                        <span id="cart-total" class="font-semibold">R$ 0</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-zinc-800 p-8 flex gap-4">
+                <button onclick="toggleCart()" 
+                        class="flex-1 py-6 border border-zinc-600 rounded-2xl font-medium">
+                    CONTINUAR EXPLORANDO
+                </button>
+                <button onclick="checkout()" 
+                        class="flex-1 py-6 bg-amber-600 rounded-2xl font-semibold">
+                    FINALIZAR COMPRA
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tailwind script already loaded via CDN
+
+        // Products Data
+        const products = [
+            {
+                id: 1,
+                name: "Pivotante Noblesse",
+                category: "pivotante",
+                price: 12490,
+                img: "https://picsum.photos/id/1015/600/800",
+                desc: "Madeira de carvalho maciço com sistema pivotante premium"
+            },
+            {
+                id: 2,
+                name: "Correr Minimal",
+                category: "correr",
+                price: 8790,
+                img: "https://picsum.photos/id/133/600/800",
+                desc: "Design minimalista com trilho invisível"
+            },
+            {
+                id: 3,
+                name: "Vidro & Madeira",
+                category: "vidro",
+                price: 15600,
+                img: "https://picsum.photos/id/201/600/800",
+                desc: "Vidro temperado com moldura em nogueira"
+            },
+            {
+                id: 4,
+                name: "Maciça Clássica",
+                category: "madeira",
+                price: 9800,
+                img: "https://picsum.photos/id/251/600/800",
+                desc: "Porta tradicional em madeira maciça com entalhes"
+            },
+            {
+                id: 5,
+                name: "Pivot Luxor Black",
+                category: "pivotante",
+                price: 18900,
+                img: "https://picsum.photos/id/180/600/800",
+                desc: "Acabamento preto fosco com detalhes dourados"
+            },
+            {
+                id: 6,
+                name: "Correr Cristal",
+                category: "correr",
+                price: 11200,
+                img: "https://picsum.photos/id/201/600/800",
+                desc: "Sistema de correr com vidro serigrafado"
+            }
+        ];
+
+        let cart = [];
+
+        // Render Products
+        function renderProducts(filteredProducts) {
+            const container = document.getElementById('products-grid');
+            container.innerHTML = '';
+            
+            filteredProducts.forEach(product => {
+                const card = document.createElement('div');
+                card.className = `door-card bg-zinc-800 rounded-3xl overflow-hidden group cursor-pointer`;
+                card.innerHTML = `
+                    <div class="relative h-96">
+                        <img src="${product.img}" class="w-full h-full object-cover group-hover:scale-110" alt="${product.name}">
+                        <div class="absolute top-6 right-6 bg-black/70 text-xs font-medium px-4 py-2 rounded-3xl">
+                            R$ ${product.price.toLocaleString('pt-BR')}
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="uppercase text-amber-600 text-xs tracking-widest mb-1">${product.category}</div>
+                        <h3 class="text-2xl font-semibold heading-font">${product.name}</h3>
+                        <p class="text-zinc-400 text-sm mt-3 line-clamp-2">${product.desc}</p>
+                        <div class="flex gap-3 mt-8">
+                            <button onclick="addToCart(${product.id}); event.stopImmediatePropagation()" 
+                                    class="flex-1 py-5 bg-zinc-700 hover:bg-amber-700 rounded-2xl text-sm font-medium">
+                                ADICIONAR
+                            </button>
+                            <button onclick="viewProduct(${product.id}); event.stopImmediatePropagation()" 
+                                    class="flex-1 py-5 border border-zinc-600 hover:border-white rounded-2xl text-sm font-medium">
+                                DETALHES
+                            </button>
+                        </div>
+                    </div>
+                `;
+                card.onclick = () => viewProduct(product.id);
+                container.appendChild(card);
+            });
+        }
+
+        function filterCategory(category) {
+            document.querySelectorAll('#filters button').forEach(btn => btn.classList.remove('active-filter', 'bg-amber-700'));
+            
+            const buttons = document.querySelectorAll('#filters button');
+            for (let btn of buttons) {
+                if ((category === 'all' && btn.textContent === 'Todas') || 
+                    btn.getAttribute('onclick').includes(category)) {
+                    btn.classList.add('active-filter', 'bg-amber-700');
+                    break;
+                }
+            }
+            
+            if (category === 'all') {
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === category);
+                renderProducts(filtered);
+            }
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            
+            cart.push({...product});
+            updateCartCount();
+            
+            // Toast
+            const toast = document.createElement('div');
+            toast.style.position = 'fixed';
+            toast.style.bottom = '30px';
+            toast.style.right = '30px';
+            toast.style.backgroundColor = '#854D0E';
+            toast.style.color = 'white';
+            toast.style.padding = '16px 24px';
+            toast.style.borderRadius = '9999px';
+            toast.style.zIndex = '9999';
+            toast.style.boxShadow = '0 10px 15px -3px rgb(0 0 0 / 0.3)';
+            toast.textContent = `${product.name} adicionado ao carrinho`;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => toast.remove(), 2800);
+        }
+
+        function updateCartCount() {
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('hidden');
+            
+            if (!modal.classList.contains('hidden')) {
+                renderCart();
+            }
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            container.innerHTML = '';
+            
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                total += item.price;
+                const div = document.createElement('div');
+                div.className = "flex gap-6";
+                div.innerHTML = `
+                    <img src="${item.img}" class="w-24 h-24 object-cover rounded-2xl">
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <div>
+                                <div class="font-medium">${item.name}</div>
+                                <div class="text-xs text-zinc-500">${item.category}</div>
+                            </div>
+                            <div class="font-semibold text-right">R$ ${item.price.toLocaleString('pt-BR')}</div>
+                        </div>
+                        <button onclick="removeFromCart(${index});" 
+                                class="text-red-400 text-sm mt-4 hover:text-red-500">Remover</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+            
+            document.getElementById('cart-total').textContent = `R$ ${total.toLocaleString('pt-BR')}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            renderCart();
+        }
+
+        function checkout() {
+            if (cart.length === 0) return;
+            alert("🎉 Obrigado! Em um site real, o checkout seria processado aqui.");
+            cart = [];
+            updateCartCount();
+            toggleCart();
+        }
+
+        function viewProduct(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            
+            alert(`🔍 Visualizando detalhes da ${product.name}\n\n${product.desc}\nPreço: R$ ${product.price.toLocaleString('pt-BR')}\n\n(Em produção: modal completo com galeria de imagens)`);
+        }
+
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert("✅ Mensagem enviada com sucesso! Entraremos em contato em breve.");
+            e.target.reset();
+        }
+
+        function showMenu() {
+            alert("📱 Menu mobile aberto (em produção: drawer lateral bonito)");
+        }
+
+        // Scroll Progress
+        function setupScrollProgress() {
+            const progressBar = document.getElementById('progress-bar');
+            
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrollPercent = scrollTop / docHeight * 100;
+                progressBar.style.width = `${scrollPercent}%`;
+            });
+        }
+
+        // Keyboard shortcuts
+        function setupKeyboard() {
+            document.addEventListener('keydown', (e) => {
+                if (e.key === "/" && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "TEXTAREA") {
+                    e.preventDefault();
+                    document.getElementById('colecao').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
+
+        // Initialize everything
+        function initialize() {
+            // Render all products initially
+            renderProducts(products);
+            
+            // Scroll progress
+            setupScrollProgress();
+            
+            // Keyboard
+            setupKeyboard();
+            
+            // Tailwind script already active
+            
+            // Fake testimonial rotation
+            const testimonials = [
+                "As portas da Portas Lux transformaram completamente minha casa. O acabamento é impecável.",
+                "Nunca imaginei que uma porta pudesse ter tanto impacto no design de um ambiente.",
+                "Qualidade excepcional e atenção aos detalhes. Recomendo de olhos fechados."
+            ];
+            
+            let current = 0;
+            setInterval(() => {
+                current = (current + 1) % testimonials.length;
+                const el = document.getElementById('testimonial');
+                el.style.opacity = 0;
+                setTimeout(() => {
+                    el.textContent = `"${testimonials[current]}"`;
+                    el.style.opacity = 1;
+                }, 600);
+            }, 7000);
+            
+            console.log('%c✅ Site Portas Lux carregado com sucesso!', 'color: #D4A373; font-size: 14px; font-family: monospace');
+        }
+
+        // Auto start
+        window.onload = initialize;
+    </script>
+</body>
+</html>
